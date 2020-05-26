@@ -1,0 +1,246 @@
+MiNiFi Config Version: 3
+Flow Controller: {name: retailpricing, comment: Created by MiNiFi C2 Flow Designer}
+Core Properties: {flow controller graceful shutdown period: 10 sec, flow service write delay interval: 500 ms,
+  administrative yield duration: 30 sec, bored yield duration: 10 millis, max concurrent threads: 1,
+  variable registry properties: ''}
+FlowFile Repository:
+  partitions: 256
+  checkpoint interval: 2 mins
+  always sync: false
+  Swap: {threshold: 20000, in period: 5 sec, in threads: 1, out period: 5 sec, out threads: 4}
+Content Repository: {content claim max appendable size: 10 MB, content claim max flow files: 100,
+  always sync: false}
+Provenance Repository: {provenance rollover time: 1 min, implementation: org.apache.nifi.provenance.MiNiFiPersistentProvenanceRepository}
+Component Status Repository: {buffer size: 1440, snapshot frequency: 1 min}
+Security Properties:
+  keystore: ''
+  keystore type: ''
+  keystore password: ''
+  key password: ''
+  truststore: ''
+  truststore type: ''
+  truststore password: ''
+  ssl protocol: ''
+  Sensitive Props: {key: '', algorithm: PBEWITHMD5AND256BITAES-CBC-OPENSSL, provider: BC}
+Processors:
+- id: 6272a937-395c-4b0f-ab99-80f02fe62f66
+  name: Extract Temp
+  class: org.apache.nifi.processors.standard.EvaluateJsonPath
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 ms
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: [failure, price, unmatched]
+  Properties: {Destination: flowfile-attribute, Null Value Representation: empty string,
+    Path Not Found Behavior: ignore, Return Type: json, price: $.price}
+- id: 06290058-d751-423b-9251-3b0ee876903b
+  name: FetchFile
+  class: org.apache.nifi.processors.standard.FetchFile
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 ms
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: [permission.denied, failure, not.found]
+  Properties: {Completion Strategy: Delete File, File to Fetch: '${absolute.path}/${filename}',
+    Log level when file not found: ERROR, Log level when permission denied: ERROR,
+    Move Conflict Strategy: Replace File}
+- id: 8e73b0a9-2e31-4a83-9ef4-7c4bb24a130a
+  name: FetchFile
+  class: org.apache.nifi.processors.standard.FetchFile
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 ms
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: [permission.denied, failure, not.found]
+  Properties: {Completion Strategy: Delete File, File to Fetch: '${absolute.path}/${filename}',
+    Log level when file not found: ERROR, Log level when permission denied: ERROR,
+    Move Conflict Strategy: Rename}
+- id: cc646278-ec06-4da2-bb68-9267baa95d7e
+  name: ListFile
+  class: org.apache.nifi.processors.standard.ListFile
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 ms
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: []
+  Properties: {File Filter: '[^\.].*', Ignore Hidden Files: 'true', Include File Attributes: 'true',
+    Input Directory: /opt/demo/logs, Input Directory Location: Local, Minimum File Age: 10 sec,
+    Minimum File Size: 20 B, Recurse Subdirectories: 'true', et-initial-listing-target: all,
+    et-node-identifier: '${hostname()}', et-time-window: 3 hours, listing-strategy: timestamps,
+    target-system-timestamp-precision: auto-detect}
+- id: a96d517e-8632-40a6-9e46-92f47b38bb3c
+  name: ListFile Images
+  class: org.apache.nifi.processors.standard.ListFile
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 ms
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: []
+  Properties: {File Filter: '[^\.].*', Ignore Hidden Files: 'true', Include File Attributes: 'true',
+    Input Directory: /opt/demo/images, Input Directory Location: Local, Minimum File Age: 10 sec,
+    Minimum File Size: 50 B, Recurse Subdirectories: 'true', et-initial-listing-target: all,
+    et-node-identifier: '${hostname()}', et-time-window: 3 hours, listing-strategy: timestamps,
+    target-system-timestamp-precision: auto-detect}
+- id: 078eeddf-0fc2-468a-b3e1-70b4e582371a
+  name: ListenHTTP
+  class: org.apache.nifi.processors.standard.ListenHTTP
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 ms
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: []
+  Properties: {Authorized DN Pattern: .*, Base Path: setPrice, Listening Port: '9988',
+    Max Unconfirmed Flowfile Time: 60 secs, Return Code: '200', multipart-read-buffer-size: 512 KB,
+    multipart-request-max-size: 1 MB}
+- id: 56dfacc8-339b-43f1-b772-d9aee643e499
+  name: PutFile
+  class: org.apache.nifi.processors.standard.PutFile
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 ms
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: [success, failure]
+  Properties: {Conflict Resolution Strategy: replace, Create Missing Directories: 'true',
+    Directory: /opt/demo/logs}
+- id: 7308819a-91fc-4438-9e8a-89f2a9ebdb5c
+  name: Run Price
+  class: org.apache.nifi.processors.standard.ExecuteProcess
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 30 s
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: []
+  Properties: {Argument Delimiter: ' ', Command: /opt/demo/runretail.sh, Redirect Error Stream: 'false'}
+- id: 51414be6-8b6c-48e3-81c2-7258e51d154e
+  name: Set Price
+  class: org.apache.nifi.processors.standard.ExecuteStreamCommand
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 ms
+  penalization period: 0 ms
+  yield period: 0 ms
+  run duration nanos: 0
+  auto-terminated relationships list: [original, nonzero status]
+  Properties: {Argument Delimiter: ;, Command Arguments: '${price}', Command Path: /opt/demo/setprice.sh,
+    Ignore STDIN: 'false', Max Attribute Length: '2048'}
+Controller Services: []
+Process Groups: []
+Input Ports: []
+Output Ports: []
+Funnels: []
+Connections:
+- id: 50d5d314-db43-44bb-9c69-9f6c18ae6b7a
+  name: Extract Temp/matched/Set Price
+  source id: 6272a937-395c-4b0f-ab99-80f02fe62f66
+  source relationship names: [matched]
+  destination id: 51414be6-8b6c-48e3-81c2-7258e51d154e
+  max work queue size: 0
+  max work queue data size: 10000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+- id: aad9fee6-e912-4726-819f-410e1995950a
+  name: FetchFile/success/01721019-adc8-1925-f275-a275096bcd51
+  source id: 06290058-d751-423b-9251-3b0ee876903b
+  source relationship names: [success]
+  destination id: 01721019-adc8-1925-f275-a275096bcd51
+  max work queue size: 0
+  max work queue data size: 10000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+- id: f6c8e317-ceda-4bca-b64a-4ad7c8aaa8ad
+  name: ListFile Images/success/FetchFile
+  source id: a96d517e-8632-40a6-9e46-92f47b38bb3c
+  source relationship names: [success]
+  destination id: 06290058-d751-423b-9251-3b0ee876903b
+  max work queue size: 0
+  max work queue data size: 10000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+- id: 9260b9ad-8b37-4d45-a66a-cdf3a9c50a05
+  name: ListFile/success/FetchFile
+  source id: cc646278-ec06-4da2-bb68-9267baa95d7e
+  source relationship names: [success]
+  destination id: 8e73b0a9-2e31-4a83-9ef4-7c4bb24a130a
+  max work queue size: 0
+  max work queue data size: 10000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+- id: 76810019-554a-49d3-9d53-7e14cf5bdafb
+  name: ListenHTTP/success/Extract Temp
+  source id: 078eeddf-0fc2-468a-b3e1-70b4e582371a
+  source relationship names: [success]
+  destination id: 6272a937-395c-4b0f-ab99-80f02fe62f66
+  max work queue size: 0
+  max work queue data size: 10000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+- id: 2cc7b2f6-c513-4104-905c-7a81cc8d020d
+  name: PutFile/success/01721019-adc8-1925-f275-a275096bcd51
+  source id: 56dfacc8-339b-43f1-b772-d9aee643e499
+  source relationship names: [success]
+  destination id: 01721019-adc8-1925-f275-a275096bcd51
+  max work queue size: 0
+  max work queue data size: 10000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+- id: 675b7c32-a855-4c07-9945-5db4bb064cf9
+  name: Retail Input
+  source id: 8e73b0a9-2e31-4a83-9ef4-7c4bb24a130a
+  source relationship names: [success]
+  destination id: 01721019-adc8-1925-f275-a275096bcd51
+  max work queue size: 0
+  max work queue data size: 20000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+- id: 13716970-491f-4b91-b90e-76b33d535338
+  name: Retail Input
+  source id: 7308819a-91fc-4438-9e8a-89f2a9ebdb5c
+  source relationship names: [success]
+  destination id: 01721019-adc8-1925-f275-a275096bcd51
+  max work queue size: 0
+  max work queue data size: 20000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+- id: 536dd896-1e23-48c2-a093-7f4fd7b9e812
+  name: Set Price/output stream/PutFile
+  source id: 51414be6-8b6c-48e3-81c2-7258e51d154e
+  source relationship names: [output stream]
+  destination id: 56dfacc8-339b-43f1-b772-d9aee643e499
+  max work queue size: 0
+  max work queue data size: 10000 B
+  flowfile expiration: 0 seconds
+  queue prioritizer class: ''
+Remote Process Groups:
+- id: 93e7f89f-97c2-40e4-b2d0-97557cde2b34
+  name: http://192.168.1.249:8080/nifi
+  url: http://192.168.1.249:8080/nifi
+  comment: ''
+  timeout: 30 secs
+  yield period: 10 sec
+  transport protocol: HTTP
+  proxy host: ''
+  proxy port: ''
+  proxy user: ''
+  proxy password: ''
+  local network interface: ''
+  Input Ports:
+  - {id: 01721019-adc8-1925-f275-a275096bcd51, name: 01721019-adc8-1925-f275-a275096bcd51,
+    comment: '', max concurrent tasks: 1, use compression: true}
+  Output Ports: []
+NiFi Properties Overrides: {}
