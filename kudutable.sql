@@ -1,3 +1,13 @@
+CREATE TABLE itemprice
+(
+       item_id INT,
+    price FLOAT,
+   created_on TIMESTAMP,
+    updated_on TIMESTAMP,	
+PRIMARY KEY (item_id) ) 
+PARTITION BY HASH PARTITIONS 4 
+STORED AS KUDU TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
+
 CREATE TABLE shelfprice 
 (
 uuid STRING, 
