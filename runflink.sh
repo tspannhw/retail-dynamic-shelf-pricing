@@ -20,3 +20,5 @@ flink run --jobmanager yarn-cluster --detached --parallelism 1 --yarnname flinkK
 # Must compile Flink app with JDK 8
 
 flink run --classpath file:///opt/cloudera/parcels/CDH/lib/hadoop/client/hadoop-mapreduce-client-core.jar -d -p 2 -ys 2 -ynm IoTKafka -c dev.datainmotion.iot.IoTKafka  iot-1.0.jar
+
+# do not put ; in sql
