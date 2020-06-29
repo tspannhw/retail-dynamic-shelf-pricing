@@ -12,4 +12,11 @@ HADOOP_USER_NAME=hdfs hdfs dfs -chmod -R 777 /user
 
 # Run Flink App
 
-flink run --jobmanager yarn-cluster --detached --parallelism 2 --yarnname flinkKafkaGroup iot-1.0.jar
+flink run --jobmanager yarn-cluster --detached --parallelism 1 --yarnname flinkKafkaGroup iot-1.0.jar
+
+
+# From SQL tutorial
+# https://github.com/cloudera/flink-tutorials/tree/master/flink-sql-tutorial
+# Must compile Flink app with JDK 8
+
+flink run --classpath file:///opt/cloudera/parcels/CDH/lib/hadoop/client/hadoop-mapreduce-client-core.jar -d -p 2 -ys 2 -ynm IoTKafka -c dev.datainmotion.iot.IoTKafka  iot-1.0.jar
