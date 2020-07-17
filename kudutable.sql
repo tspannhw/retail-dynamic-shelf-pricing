@@ -24,6 +24,7 @@ CREATE TABLE prices
 (
   upc STRING,
   originStore STRING,
+  updateDate STRING,
   longDescription STRING,
   itemDescription STRING,
   brandName STRING,
@@ -31,8 +32,7 @@ CREATE TABLE prices
   price STRING,
   msrp STRING,
   tpr STRING,
-  updateDate STRING,
-PRIMARY KEY (upc, originStore) ) 
+PRIMARY KEY (upc, originStore, updateDate) ) 
 PARTITION BY HASH PARTITIONS 4 
 STORED AS KUDU TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
 
