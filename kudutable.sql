@@ -17,10 +17,10 @@ CREATE TABLE prices
   itemDescription STRING,
   brandName STRING,
   displayImage STRING, 
-  price FLOAT,
-  msrp FLOAT,
-  tpr FLOAT,
-  update_dt TIMESTAMP,
+  price STRING,
+  msrp STRING,
+  tpr STRING,
+  update_dt STRING,
 PRIMARY KEY (upc, origin_store) ) 
 PARTITION BY HASH PARTITIONS 4 
 STORED AS KUDU TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
