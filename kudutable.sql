@@ -9,10 +9,21 @@
   "itemDescription" : "Eggo Homestyle Waffles 10 Count",
   "origin_store" : "kroger"
   
+    "longDescription" : "Kroger® Fat Free Skim Milk",
+  "brandName" : "Kroger",
+  "displayImage" : "https://www.kroger.com/product/images/large/front/0001111042315",
+  "price" : "2.19",
+  "msrp" : "2.19",
+  "tpr" : "0",
+  "update_dt" : "20200717160806",
+  "upc" : "0001111042315",
+  "itemDescription" : "Kroger® Fat Free Skim Milk",
+  "origin_store" : "kroger"
+  
 CREATE TABLE prices
 (
   upc STRING,
-  origin_store STRING,
+  originStore STRING,
   longDescription STRING,
   itemDescription STRING,
   brandName STRING,
@@ -20,7 +31,7 @@ CREATE TABLE prices
   price STRING,
   msrp STRING,
   tpr STRING,
-  update_dt STRING,
+  updateDate STRING,
 PRIMARY KEY (upc, origin_store) ) 
 PARTITION BY HASH PARTITIONS 4 
 STORED AS KUDU TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
