@@ -9,7 +9,7 @@
   "itemDescription" : "Eggo Homestyle Waffles 10 Count",
   "origin_store" : "kroger"
   
-CREATE TABLE 
+CREATE TABLE prices
 (
   upc STRING,
   origin_store STRING,
