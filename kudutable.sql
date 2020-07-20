@@ -20,6 +20,12 @@
   "itemDescription" : "Kroger® Fat Free Skim Milk",
   "origin_store" : "kroger"
   
+  insert into prices
+(upc,originstore,updatedate,itemdescription,price)
+values
+('0003450015136', 'kroger', '20200720111539', 'Land O Lakes Salted Butter', '4.49')
+
+
 CREATE TABLE prices
 (
   upc STRING,
