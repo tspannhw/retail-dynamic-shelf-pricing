@@ -8,19 +8,19 @@
    "type": "string"
   },
   {
-   "name": "originStore",
+   "name": "originstore",
    "type": "string"
   },
   {
-   "name": "updateDate",
+   "name": "updatedate",
    "type": "string"
   },
   {
-   "name": "longDescription",
+   "name": "longdescription",
    "type": "string"
   },
   {
-   "name": "itemDescription",
+   "name": "itemdescription",
    "type": "string"
   },
   {
@@ -28,7 +28,7 @@
    "type": "string"
   },
   {
-   "name": "displayImage",
+   "name": "displayimage",
    "type": "string"
   },
   {
