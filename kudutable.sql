@@ -25,6 +25,10 @@
 values
 ('0003450015136', 'kroger', '20200720111539', 'Land O Lakes Salted Butter', '4.49')
 
+select upc, originstore, updatedate, brandname, price, itemdescription, displayimage, longdescription, msrp, tpr
+from prices
+order by updatedate desc
+
 CREATE TABLE itemprice
 (
   upc STRING,
