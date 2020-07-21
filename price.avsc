@@ -1,0 +1,47 @@
+{
+ "type": "record",
+ "name": "prices",
+ "namespace": "com.cloudera.data",
+ "fields": [
+  {
+   "name": "upc",
+   "type": "string"
+  },
+  {
+   "name": "originStore",
+   "type": "string"
+  },
+  {
+   "name": "updateDate",
+   "type": "string"
+  },
+  {
+   "name": "longDescription",
+   "type": "string"
+  },
+  {
+   "name": "itemDescription",
+   "type": "string"
+  },
+  {
+   "name": "brandName",
+   "type": "string"
+  },
+  {
+   "name": "displayImage",
+   "type": "string"
+  },
+  {
+   "name": "price",
+   "type": "string"
+  },
+  {
+   "name": "msrp",
+   "type": "string"
+  },
+  {
+   "name": "tpr",
+   "type": "string"
+  }
+ ]
+}
