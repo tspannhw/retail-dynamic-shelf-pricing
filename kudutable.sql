@@ -25,20 +25,36 @@
 values
 ('0003450015136', 'kroger', '20200720111539', 'Land O Lakes Salted Butter', '4.49')
 
+CREATE TABLE itemprice
+(
+  upc STRING,
+  originstore STRING,
+  updatedate STRING,
+  longdescription STRING,
+  itemdescription STRING,
+  brandname STRING,
+  displayimage STRING, 
+  price STRING,
+  msrp STRING,
+  tpr STRING,
+PRIMARY KEY (upc, originstore, updatedate) ) 
+PARTITION BY HASH PARTITIONS 4 
+STORED AS KUDU TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
+
 
 CREATE TABLE prices
 (
   upc STRING,
-  originStore STRING,
-  updateDate STRING,
-  longDescription STRING,
-  itemDescription STRING,
-  brandName STRING,
-  displayImage STRING, 
+  originstore STRING,
+  updatedate STRING,
+  longdescription STRING,
+  itemdescription STRING,
+  brandname STRING,
+  displayimage STRING, 
   price STRING,
   msrp STRING,
   tpr STRING,
-PRIMARY KEY (upc, originStore, updateDate) ) 
+PRIMARY KEY (upc, originstore, updatedate) ) 
 PARTITION BY HASH PARTITIONS 4 
 STORED AS KUDU TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
 
