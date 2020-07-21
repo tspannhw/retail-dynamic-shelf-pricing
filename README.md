@@ -1,7 +1,10 @@
 # retail-dynamic-shelf-pricing
+
 Retail - Dynamic Shelf Pricing
 
 eink
+
+write to hdfs https://github.com/tspannhw/NiFItoKafkaConnect
 
 https://github.com/IanHarvey/bluepy
 
