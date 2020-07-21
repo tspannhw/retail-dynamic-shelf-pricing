@@ -8,7 +8,7 @@
  "hdfs.output": "/tmp/itemprice/",
  "output.avro.passthrough.enabled": "true",
  "hadoop.conf.path": "file:///etc/hadoop/conf",
- "name": "test3",
+ "name": "itemprice",
  "output.writer": "com.cloudera.dim.kafka.connect.partition.writers.avro.AvroPartitionWriter",
  "value.converter": "com.cloudera.dim.kafka.connect.converts.AvroConverter",
  "output.storage": "com.cloudera.dim.kafka.connect.hdfs.HdfsPartitionStorage",
