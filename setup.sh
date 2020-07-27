@@ -15,7 +15,7 @@ HADOOP_USER_NAME=hdfs hdfs dfs -chmod -R 777 /tmp/itemprice
 HADOOP_USER_NAME=hdfs hdfs dfs -chown kafka:kafka /tmp/itemprice
 impala-shell -i ec2-52-54-225-47.compute-1.amazonaws.com -d default -f kudu.sql 
 
-curl -k -u admin:supersecret1 --location --request POST 'https://<atlas_server_host>:<atlas_server_port>/api/atlas/v2/types/typedefs' \
+curl -k -u admin:supersecret1 --location --request POST 'http://ec2-52-54-225-47.compute-1.amazonaws.com:31000/api/atlas/v2/types/typedefs' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "enumDefs": [],
