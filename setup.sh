@@ -13,3 +13,4 @@ HADOOP_USER_NAME=hdfs hdfs dfs -chown kafka:kafka /tmp/sensors
 HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /tmp/itemprice
 HADOOP_USER_NAME=hdfs hdfs dfs -chmod -R 777 /tmp/itemprice
 HADOOP_USER_NAME=hdfs hdfs dfs -chown kafka:kafka /tmp/itemprice
+impala-shell -i ec2-52-54-225-47.compute-1.amazonaws.com -d default -f kudu.sql 
