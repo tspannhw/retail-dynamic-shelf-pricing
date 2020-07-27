@@ -14,3 +14,72 @@ HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /tmp/itemprice
 HADOOP_USER_NAME=hdfs hdfs dfs -chmod -R 777 /tmp/itemprice
 HADOOP_USER_NAME=hdfs hdfs dfs -chown kafka:kafka /tmp/itemprice
 impala-shell -i ec2-52-54-225-47.compute-1.amazonaws.com -d default -f kudu.sql 
+
+curl -k -u admin:supersecret1 --location --request POST 'https://<atlas_server_host>:<atlas_server_port>/api/atlas/v2/types/typedefs' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "enumDefs": [],
+    "structDefs": [],
+    "classificationDefs": [],
+    "entityDefs": [
+        {
+            "name": "flink_application",
+            "superTypes": [
+                "Process"
+            ],
+            "serviceType": "flink",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "id",
+                    "typeName": "string",
+                    "cardinality": "SINGLE",
+                    "isIndexable": true,
+                    "isOptional": false,
+                    "isUnique": true
+                },
+                {
+                    "name": "startTime",
+                    "typeName": "date",
+                    "cardinality": "SINGLE",
+                    "isIndexable": false,
+                    "isOptional": true,
+                    "isUnique": false
+                },
+                {
+                    "name": "endTime",
+                    "typeName": "date",
+                    "cardinality": "SINGLE",
+                    "isIndexable": false,
+                    "isOptional": true,
+                    "isUnique": false
+                },
+                {
+                    "name": "conf",
+                    "typeName": "map<string,string>",
+                    "cardinality": "SINGLE",
+                    "isIndexable": false,
+                    "isOptional": true,
+                    "isUnique": false
+                },
+                {
+                    "name": "inputs",
+                    "typeName": "array<string>",
+                    "cardinality": "LIST",
+                    "isIndexable": false,
+                    "isOptional": false,
+                    "isUnique": false
+                },
+                {
+                    "name": "outputs",
+                    "typeName": "array<string>",
+                    "cardinality": "LIST",
+                    "isIndexable": false,
+                    "isOptional": false,
+                    "isUnique": false
+                }
+            ]
+        }
+    ],
+    "relationshipDefs": []
+}'
