@@ -27,10 +27,6 @@
   {
    "name": "uuid",
    "type": "string"
-  },
-    {
-   "name": "ts",
-   "type": "string"
   }
  ]
 }
