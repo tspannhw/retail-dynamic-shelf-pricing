@@ -13,3 +13,7 @@ group by brandname, upc, originstore
 order by brandname asc;
 
 
+select max( price ), upc, itemdescription, brandname
+from itemprice
+where price is not null and trim(price) != ''
+group by upc, itemdescription, brandname;
