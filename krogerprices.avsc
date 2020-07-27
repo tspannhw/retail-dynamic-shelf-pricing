@@ -30,8 +30,8 @@
   },
   {
    "name": "price",
-   "type": "float",
-   "default": "0.00"
+   "type": ["float","null"],
+   "default": 0.00
   },
   {
    "name": "uuid",
