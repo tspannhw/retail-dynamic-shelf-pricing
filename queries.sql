@@ -17,3 +17,10 @@ select max( price ), upc, itemdescription, brandname
 from itemprice
 where price is not null and trim(price) != ''
 group by upc, itemdescription, brandname;
+
+
+select * from itemprice
+where originstore = 'kroger';
+
+select * from itemprice
+where originstore = 'walmart';
