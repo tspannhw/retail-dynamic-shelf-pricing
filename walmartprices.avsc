@@ -5,11 +5,17 @@
  "fields": [
   {
    "name": "upc",
-   "type": "string"
+   "type": [
+    "string",
+    "null"
+   ]
   },
   {
    "name": "updatedate",
-   "type": "string"
+   "type": [
+    "string",
+    "null"
+   ]
   },
   {
    "name": "itemdescription",
@@ -17,7 +23,10 @@
   },
   {
    "name": "brandname",
-   "type": "string"
+   "type": [
+    "string",
+    "null"
+   ]
   },
   {
    "name": "price",
@@ -26,7 +35,10 @@
   },
   {
    "name": "uuid",
-   "type": "string"
+   "type": [
+    "string",
+    "null"
+   ]
   }
  ]
 }
