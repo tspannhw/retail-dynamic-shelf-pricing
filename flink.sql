@@ -28,4 +28,4 @@ select upc,updatedate,itemdescription,brandname,CAST(price as float) as price, U
 from itemprice
 where originstore = 'walmart';
 
-
+# bug on select from krogerprices
