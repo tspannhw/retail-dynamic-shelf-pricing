@@ -41,3 +41,8 @@ https://developer.kroger.com/admin/user/apps/register
 
 https://developer.kroger.com/documentation
 
+# Create a Cloudera Visual Application from the Impala/Kudu DataSet
+
+When formatting the table, remove unneeded fields and make the formatting for the Image this:
+
+vizappdisplayformatfunction.js
