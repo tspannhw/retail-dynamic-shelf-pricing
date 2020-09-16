@@ -37,6 +37,32 @@ https://developer.kroger.com/reference
 
 https://developer.kroger.com/admin/user/apps/register
 
+# Pick a Kroger Location
+
+# Pick some items
+
+[
+{"item":"0001111042315"},
+{"item":"0001111041700"},
+{"item":"0001111060903"},
+{"item":"0001500007308"},
+{"item":"0002100061161"},
+{"item":"0001380010340"},
+{"item":"0002100065883"},
+{"item":"0007210024200"},
+{"item":"0004900002890"},
+{"item":"0003450015136"},
+{"item":"0001600027528"},
+{"item":"0004400006141"},
+{"item":"0003800040260"},
+{"item":"0007047000323"},
+{"item":"0000000094011"},
+{"item":"0001111097971"},
+{"item":"0001111060903"},
+{"item":"0000000094011"},
+{"item":"819576029120"}
+] 
+
 # API Docs
 
 https://developer.kroger.com/documentation
