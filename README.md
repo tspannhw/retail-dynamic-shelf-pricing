@@ -12,6 +12,7 @@ https://pimylifeup.com/raspberry-pi-ibeacon/
 
 https://www.bluetooth.com/blog/bluez-on-raspberry-pi-update/
 
+# Retail Competitive Pricing
 
 
 # Walmart Labs Data Source REST
