@@ -9,5 +9,5 @@
 { "name" : "cost", "type" : ["null", "string"]}, 
 { "name" : "product", "type" : ["null", "string"]},
 { "name" : "tx_date", "type" : ["null", "string"]},
-{ "name" : "brand_name", "type" : ["null", "string"]},
+{ "name" : "brand_name", "type" : ["null", "string"]}
 ] }
